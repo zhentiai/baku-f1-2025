@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -37,22 +36,6 @@
       border-radius: 8px;
       font-weight: bold;
     }
-    section {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-snap-align: start;
-      background: #fff8f0ee;
-      backdrop-filter: blur(2px);
-      border-radius: 12px;
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-    h2, h3 {
-      color: #d40000;
-    }
-    ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; }
     nav {
       display: flex;
       justify-content: center;
@@ -68,11 +51,50 @@
       color: #000;
       text-decoration: none;
     }
+    section {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-align: start;
+      background: #fff8f0ee;
+      backdrop-filter: blur(2px);
+      border-radius: 12px;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      scroll-margin-top: 80px;
+    }
+    h2, h3 {
+      color: #d40000;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 10px 0;
+    }
+    a {
+      color: #d40000;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
     footer {
       text-align: center;
       padding: 30px;
       font-size: 0.9em;
       color: #888;
+    }
+    #currency-widget {
+      text-align:center;
+      font-size:0.9em;
+      margin: 20px auto;
+      background: #ffffffcc;
+      padding: 10px;
+      max-width: 400px;
+      border-radius: 8px;
+      color: #000;
     }
   </style>
 </head>
@@ -90,6 +112,27 @@
     <a href="#day3">День 3</a>
     <a href="#day4">День 4</a>
   </nav>
+
+  <div id="currency-widget">
+    💱 Курс маната:
+    <span id="azn-rub">AZN → RUB: ...</span> |
+    <span id="azn-usd">USD: ...</span> |
+    <span id="azn-eur">EUR: ...</span>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
+          document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
+          document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
+        })
+        .catch(() => {
+          document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
+        });
+    });
+  </script>
 
   <section id="day1">
     <h3>День 1 — 17 сентября</h3>
@@ -134,8 +177,8 @@
 
   <footer>
     © 2025 Formula 1 Trip Baku<br>
-    💱 <a href="https://www.cbr.ru/currency_base/daily/">Курс к рублю</a> | 
-    <a href="https://www.xe.com/currency/azn-azerbaijani-manat">К доллару</a> | 
+    💱 <a href="https://www.cbr.ru/currency_base/daily/">Курс к рублю</a> |
+    <a href="https://www.xe.com/currency/azn-azerbaijani-manat">К доллару</a> |
     <a href="https://www.google.com/search?q=azn+to+eur">К евро</a> |
     <a href="https://www.bookvoed.ru/book?id=15629203">Разговорник</a>
   </footer>
