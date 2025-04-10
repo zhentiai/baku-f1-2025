@@ -53,8 +53,9 @@
     }
     section {
       height: 100vh;
-      overflow-y: auto;
-      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background: #fff8f0ee;
       backdrop-filter: blur(2px);
       border-radius: 12px;
@@ -65,10 +66,12 @@
     }
     h2, h3 {
       color: #d40000;
+      font-size: 2.4em;
     }
     ul {
       list-style: none;
       padding: 0;
+      font-size: 1.5em;
     }
     li {
       margin: 10px 0;
@@ -87,18 +90,14 @@
       color: #888;
     }
     #currency-widget {
-      text-align:center;
-      font-size:0.9em;
-      margin: 20px auto;
-      background: #ffffffcc;
+      margin: 30px auto;
+      max-width: 800px;
       padding: 10px;
-      max-width: 400px;
-      border-radius: 8px;
-      color: #000;
+      text-align: center;
     }
   </style>
 </head>
-<body>
+<body id="top">
   <header>
     <h1>Формула 1 в Баку</h1>
     <p>Наша незабываемая поездка — Сентябрь 2025</p>
@@ -114,25 +113,8 @@
   </nav>
 
   <div id="currency-widget">
-    💱 Курс маната:
-    <span id="azn-rub">AZN → RUB: ...</span> |
-    <span id="azn-usd">USD: ...</span> |
-    <span id="azn-eur">EUR: ...</span>
+    <iframe style="width:100%;border:0;overflow:hidden;background-color:transparent;height:300px" scrolling="no" src="https://fortraders.org/informers/getInformer?st=8&cat=7&title=%D0%9A%D1%83%D1%80%D1%81%D1%8B%20%D0%B2%D0%B0%D0%BB%D1%8E%D1%82%20%D0%A6%D0%91%20%D0%A0%D0%A4&texts=%7B%22toolTitle%22%3A%22%D0%92%D0%B0%D0%BB%D1%8E%D1%82%D0%B0%22%2C%22todayCourse%22%3A%22%22%7D&mult=1&showGetBtn=0&hideHeader=0&hideDate=0&w=0&codes=1&colors=false&items=2%2C21%2C10&columns=todayCourse&toCur=11111"></iframe>
   </div>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
-          document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
-          document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
-        })
-        .catch(() => {
-          document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
-        });
-    });
-  </script>
 
   <section id="day1">
     <h3>День 1 — 17 сентября</h3>
@@ -142,6 +124,7 @@
       <li>19:30 — Прогулка по <a href="https://tinyurl.com/2kfv9j8u">Приморскому бульвару</a></li>
       <li>20:30 — Ужин в <a href="https://sahil.az/">SAHiL</a></li>
     </ul>
+    <p style="text-align:center; margin-top: 20px;"><a href="#top" style="display:inline-block; background:#ffcc00; padding:10px 16px; border-radius:8px; font-weight:bold; color:#000; text-decoration:none;">↑ Назад</a></p>
   </section>
 
   <section id="day2">
@@ -153,6 +136,7 @@
       <li>19:30 — Ужин в <a href="https://www.fireworks.az/en/">Fireworks</a></li>
       <li>21:30 — <a href="https://tinyurl.com/3vxex96x">360 Bar</a></li>
     </ul>
+    <p style="text-align:center; margin-top: 20px;"><a href="#top" style="display:inline-block; background:#ffcc00; padding:10px 16px; border-radius:8px; font-weight:bold; color:#000; text-decoration:none;">↑ Назад</a></p>
   </section>
 
   <section id="day3">
@@ -163,6 +147,7 @@
       <li>19:30 — Ужин в <a href="https://tinyurl.com/mu46sutb">Zafferano</a></li>
       <li>21:30 — <a href="https://tinyurl.com/bdecv8xp">Клуб Eleven</a></li>
     </ul>
+    <p style="text-align:center; margin-top: 20px;"><a href="#top" style="display:inline-block; background:#ffcc00; padding:10px 16px; border-radius:8px; font-weight:bold; color:#000; text-decoration:none;">↑ Назад</a></p>
   </section>
 
   <section id="day4">
@@ -173,14 +158,11 @@
       <li>15:30 — Обед в <a href="https://tinyurl.com/stwv9wrj">Dolma</a></li>
       <li>19:30 — Ужин в <a href="https://tinyurl.com/4buu9swa">Marani</a></li>
     </ul>
+    <p style="text-align:center; margin-top: 20px;"><a href="#top" style="display:inline-block; background:#ffcc00; padding:10px 16px; border-radius:8px; font-weight:bold; color:#000; text-decoration:none;">↑ Назад</a></p>
   </section>
 
   <footer>
-    © 2025 Formula 1 Trip Baku<br>
-    💱 <a href="https://www.cbr.ru/currency_base/daily/">Курс к рублю</a> |
-    <a href="https://www.xe.com/currency/azn-azerbaijani-manat">К доллару</a> |
-    <a href="https://www.google.com/search?q=azn+to+eur">К евро</a> |
-    <a href="https://www.bookvoed.ru/book?id=15629203">Разговорник</a>
+    © 2025 Formula 1 Trip Baku
   </footer>
 </body>
 </html>
