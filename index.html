@@ -1,54 +1,81 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Формула 1 в Баку — Сентябрь 2025</title>
   <style>
     html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8f0;
       background-image: url('background.png');
       background-repeat: repeat;
       background-size: contain;
       background-position: center top;
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
       margin: 0;
       padding: 0;
       color: #333;
     }
     header {
-      background: url('cover.png') center top no-repeat;
+      position: relative;
+      background: url('cover.png') no-repeat center top;
       background-size: cover;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: flex-end;
       align-items: center;
       text-align: center;
-      padding: 80px 20px 40px;
+      padding: 20px;
+    }
+    header h1, header p {
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     }
     header h1 {
-      font-size: 2.8em;
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-      margin: 0;
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
     header p {
-      font-size: 1.3em;
-      color: #f0f0f0;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      font-size: 1.2em;
+      margin-bottom: 20px;
     }
     header a {
-      margin-top: 20px;
+      margin: 8px;
       padding: 12px 24px;
       background: #ffcc00;
       color: #000;
       text-decoration: none;
       border-radius: 8px;
       font-weight: bold;
-      display: inline-block;
+    }
+    #currency-widget {
+      text-align:center;
+      font-size:0.9em;
+      margin: 20px auto;
+      color: #000;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 10px;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px;
+    }
+    nav a {
+      background: #ffcc00;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
     }
     section {
       background-color: #fff8f0ee;
@@ -70,25 +97,33 @@
       color: #888;
     }
   </style>
+  <link rel="preconnect" href="https://api.exchangerate.host">
 </head>
-<body>
+<body id="top">
   <header>
     <h1>Формула 1 в Баку</h1>
     <p>Наша незабываемая поездка — Сентябрь 2025</p>
     <a href="#schedule">Программа поездки ↓</a>
+    <a href="plan.pdf" download>Скачать PDF-план</a>
   </header>
 
-  <section id="schedule">
-    <h2>Программа поездки</h2>
-    <ul>
-      <li>17 сентября — Прилет и прогулка</li>
-      <li>18 сентября — Экскурсии и ужин</li>
-      <li>19 сентября — Свободные заезды</li>
-    </ul>
-  </section>
-
-  <footer>
-    © 2025 Formula 1 Trip Baku — Все права защищены.
-  </footer>
+  <div id="currency-widget">
+    💱 Курс маната:
+    <span id="azn-rub">AZN → RUB: ...</span> |
+    <span id="azn-usd">USD: ...</span> |
+    <span id="azn-eur">EUR: ...</span>
+  </div>
+  <script>
+    fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
+        document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
+        document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
+      })
+      .catch(() => {
+        document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
+      });
+  </script>
 </body>
 </html>
