@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -20,8 +21,8 @@
     header {
       position: relative;
       background: url('cover.png') no-repeat center top;
-      background-size: cover;
-      min-height: 100vh;
+      background-size: 100% auto;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -107,6 +108,14 @@
     <a href="plan.pdf" download>Скачать PDF-план</a>
   </header>
 
+  <nav>
+    <a href="#day1">День 1</a>
+    <a href="#day2">День 2</a>
+    <a href="#day3">День 3</a>
+    <a href="#day4">День 4</a>
+    <a href="#schedule">Все дни</a>
+  </nav>
+
   <div id="currency-widget">
     💱 Курс маната:
     <span id="azn-rub">AZN → RUB: ...</span> |
@@ -114,16 +123,30 @@
     <span id="azn-eur">EUR: ...</span>
   </div>
   <script>
-    fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
-        document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
-        document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
-      })
-      .catch(() => {
-        document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
-      });
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
+          document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
+          document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
+        })
+        .catch(() => {
+          document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
+        });
+    });
   </script>
+
+  <section id="schedule">
+    <h2>Программа поездки</h2>
+    <div id="day1"><h3>День 1</h3><p>Описание дня 1...</p></div>
+    <div id="day2"><h3>День 2</h3><p>Описание дня 2...</p></div>
+    <div id="day3"><h3>День 3</h3><p>Описание дня 3...</p></div>
+    <div id="day4"><h3>День 4</h3><p>Описание дня 4...</p></div>
+  </section>
+
+  <footer>
+    © 2025 Formula 1 Trip Baku — All rights reserved.
+  </footer>
 </body>
 </html>
