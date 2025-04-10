@@ -6,22 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Формула 1 в Баку — Сентябрь 2025</title>
   <style>
-    html { scroll-behavior: smooth; }
-    body {
-      background-image: url('background.png');
-      background-repeat: repeat;
-      background-size: contain;
-      background-position: center top;
-      font-family: Arial, sans-serif;
-      background-color: #fff8f0;
+    html, body {
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      background: url('background.png') repeat;
+      background-size: contain;
       color: #333;
     }
     header {
-      position: relative;
       background: url('cover.png') no-repeat center top;
-      background-size: 100% auto;
+      background-size: cover;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -29,20 +25,8 @@
       align-items: center;
       text-align: center;
       padding: 20px;
-    }
-    header h1, header p {
-      margin: 0;
-      padding: 0;
       color: #fff;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    }
-    header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 1.2em;
-      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
     }
     header a {
       margin: 8px;
@@ -53,16 +37,22 @@
       border-radius: 8px;
       font-weight: bold;
     }
-    #currency-widget {
-      text-align:center;
-      font-size:0.9em;
-      margin: 20px auto;
-      color: #000;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 10px;
-      max-width: 400px;
-      border-radius: 8px;
+    section {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-align: start;
+      background: #fff8f0ee;
+      backdrop-filter: blur(2px);
+      border-radius: 12px;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
     }
+    h2, h3 {
+      color: #d40000;
+    }
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; }
     nav {
       display: flex;
       justify-content: center;
@@ -78,19 +68,6 @@
       color: #000;
       text-decoration: none;
     }
-    section {
-      background-color: #fff8f0ee;
-      backdrop-filter: blur(2px);
-      border-radius: 12px;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-    h2 { color: #d40000; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; }
-    a { color: #d40000; text-decoration: none; }
-    a:hover { text-decoration: underline; }
     footer {
       text-align: center;
       padding: 30px;
@@ -98,13 +75,12 @@
       color: #888;
     }
   </style>
-  <link rel="preconnect" href="https://api.exchangerate.host">
 </head>
-<body id="top">
+<body>
   <header>
     <h1>Формула 1 в Баку</h1>
     <p>Наша незабываемая поездка — Сентябрь 2025</p>
-    <a href="#schedule">Программа поездки ↓</a>
+    <a href="#day1">Программа поездки ↓</a>
     <a href="plan.pdf" download>Скачать PDF-план</a>
   </header>
 
@@ -113,40 +89,55 @@
     <a href="#day2">День 2</a>
     <a href="#day3">День 3</a>
     <a href="#day4">День 4</a>
-    <a href="#schedule">Все дни</a>
   </nav>
 
-  <div id="currency-widget">
-    💱 Курс маната:
-    <span id="azn-rub">AZN → RUB: ...</span> |
-    <span id="azn-usd">USD: ...</span> |
-    <span id="azn-eur">EUR: ...</span>
-  </div>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('https://api.exchangerate.host/latest?base=AZN&symbols=RUB,USD,EUR')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('azn-rub').textContent = `AZN → RUB: ${data.rates.RUB.toFixed(2)}`;
-          document.getElementById('azn-usd').textContent = `USD: ${data.rates.USD.toFixed(2)}`;
-          document.getElementById('azn-eur').textContent = `EUR: ${data.rates.EUR.toFixed(2)}`;
-        })
-        .catch(() => {
-          document.getElementById('currency-widget').textContent = 'Не удалось загрузить курсы валют 😔';
-        });
-    });
-  </script>
+  <section id="day1">
+    <h3>День 1 — 17 сентября</h3>
+    <ul>
+      <li>16:30 — Прилёт в Баку</li>
+      <li>18:00 — Заселение в отель</li>
+      <li>19:30 — Прогулка по <a href="https://tinyurl.com/2kfv9j8u">Приморскому бульвару</a></li>
+      <li>20:30 — Ужин в <a href="https://sahil.az/">SAHiL</a></li>
+    </ul>
+  </section>
 
-  <section id="schedule">
-    <h2>Программа поездки</h2>
-    <div id="day1"><h3>День 1</h3><p>Описание дня 1...</p></div>
-    <div id="day2"><h3>День 2</h3><p>Описание дня 2...</p></div>
-    <div id="day3"><h3>День 3</h3><p>Описание дня 3...</p></div>
-    <div id="day4"><h3>День 4</h3><p>Описание дня 4...</p></div>
+  <section id="day2">
+    <h3>День 2 — 18 сентября</h3>
+    <ul>
+      <li>09:00 — <a href="https://whc.unesco.org/en/list/958">Ичери Шехер</a></li>
+      <li>12:00 — Обед в <a href="https://artclub.az/restaurant">Art Club</a></li>
+      <li>14:00 — <a href="https://heydaraliyevcenter.az/">Центр Гейдара Алиева</a></li>
+      <li>19:30 — Ужин в <a href="https://www.fireworks.az/en/">Fireworks</a></li>
+      <li>21:30 — <a href="https://tinyurl.com/3vxex96x">360 Bar</a></li>
+    </ul>
+  </section>
+
+  <section id="day3">
+    <h3>День 3 — 19 сентября</h3>
+    <ul>
+      <li>09:30 — Свободные заезды Формулы 1</li>
+      <li>13:30 — Обед в фан-зоне</li>
+      <li>19:30 — Ужин в <a href="https://tinyurl.com/mu46sutb">Zafferano</a></li>
+      <li>21:30 — <a href="https://tinyurl.com/bdecv8xp">Клуб Eleven</a></li>
+    </ul>
+  </section>
+
+  <section id="day4">
+    <h3>День 4 — 20 сентября</h3>
+    <ul>
+      <li>10:30 — Тренировка F1</li>
+      <li>14:00 — Квалификация</li>
+      <li>15:30 — Обед в <a href="https://tinyurl.com/stwv9wrj">Dolma</a></li>
+      <li>19:30 — Ужин в <a href="https://tinyurl.com/4buu9swa">Marani</a></li>
+    </ul>
   </section>
 
   <footer>
-    © 2025 Formula 1 Trip Baku — All rights reserved.
+    © 2025 Formula 1 Trip Baku<br>
+    💱 <a href="https://www.cbr.ru/currency_base/daily/">Курс к рублю</a> | 
+    <a href="https://www.xe.com/currency/azn-azerbaijani-manat">К доллару</a> | 
+    <a href="https://www.google.com/search?q=azn+to+eur">К евро</a> |
+    <a href="https://www.bookvoed.ru/book?id=15629203">Разговорник</a>
   </footer>
 </body>
 </html>
